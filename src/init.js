@@ -19,7 +19,8 @@ function readSyncByRl(tips) {
 
 readSyncByRl('请输入文件夹的绝对路径:').then((res) => {
     // res = '/Users/zhangyu/jeff/git/Working/upupGame/project/pages/index'
-    res = '/Users/zhangyu/jeff/git/Working/upupGame/project/pages/member'
+    // res = '/Users/zhangyu/jeff/git/Working/upupGame/project/pages/member'
+    // res = '/Users/zhangyu/jeff/git/Working/upupGame/project/pages/detail'
     console.log("路径为:", res);
     console.log('请稍后，处理中...')
 

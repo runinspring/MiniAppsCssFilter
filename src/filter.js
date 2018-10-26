@@ -13,21 +13,19 @@ var analyzeWxml = () => {
         let file_path = path.join(dir, fName + '.wxml')
         var str = fs.readFileSync(file_path, 'utf-8');
         str = str.replace(/\'/g, '"'); //单引号换成双引号
-        console.log(111)
+
         str = str.replace(/(\r\n)|(\n)/g, '') //移除换行符
         // console.log(str)
+        //过滤掉注释里的内容
+        /*
         arrIgnore = str.match(/\<\!\-\-(.*?)\-\-\>/g)
-        // console.log(222,arrIgnore.length,arrIgnore)
         if (arrIgnore.length > 0) {
             for (let i2 = 0, len = arrIgnore.length; i2 < len; i2++) {
                 let ig = arrIgnore[i2]
                 str = str.replace(ig, '')
             }
         }
-
-        // console.log(str)
-        // console.log(arr4)
-        // return
+         */
         var arr1 = str.match(reg);
 
         var arrClassName = []; //
@@ -40,9 +38,6 @@ var analyzeWxml = () => {
                 let className = arr[k];
                 if (arrClassName.indexOf(className) === -1) {
                     arrClassName.push(className)
-                    if(className =='touchbg'){
-                        console.log(99999, arr1[j])
-                    }
                 }
             }
         }
@@ -83,11 +78,12 @@ var analyzeWxml = () => {
             'wxml中无效的class名称': failClassName,
             'wxss中未使用的样式名称': cssUnUseList
         }
-        console.log(failClassName.length, cssUnUseList.length)
+        // console.log(failClassName.length, cssUnUseList.length)
         // console.log(useList)
         // console.log('str', varList)
 
     }
+    //输出结果
     console.log(result)
 }
 /**分析 css 文件结构 */
@@ -102,6 +98,7 @@ var analyzeWxss = () => {
         let fName = list[i]
         let file_path = path.join(dir, fName + '.wxss')
         var str = fs.readFileSync(file_path, 'utf-8');
+        str = str.replace(/\#/g, '.'); //把 # 替换成 .
         // result[fName]=[]
         let arrCss = []
         let arr = str.match(reg)
